@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+	<head>
+    <title>Country GDP vs Easy of business</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js" charset="utf-8"></script>
+    <style>
+      html, body, div, h1 {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        outline: 0;
+        font-family: arial;
+      }
+      div#header {
+        background-color: #191987;
+        padding: 5px;
+      }
+      div#header h1{
+        color: white;
+      }
+      form {
+        display: inline-block;
+      }
+      p#result {
+        display: inline-block;
+        margin: 0;
+        font-weight: bold;
+      }
+      div#search {
+        padding: 5px;
+        padding-top: 30px;
+      }
+      button {
+        background-color: #191987;
+        color: white;
+        border: 0;
+      }
+    </style>
+	</head>
+
+	<body>
+    <script type="text/javascript">
+      var countries = [
+        { name: "Brazil", GDP: 1000 },
+        { name: "Iraq", GDP: 890 },
+        { name: "US", GDP: 300 },
+        { name: "India", GDP: 500 }
+      ]
+
+      function findGDP(name) {
+        for (i=0; i < countries.length; i++) {
+          if (countries[i].name === name) {
+            return name + ": $"+countries[i].GDP;
+          }
+        }
+        return "NA";
+      }
+
+      function getCountry() {
+        var country = d3.select("input#country").property("value")
+        console.log(country)
+        var gdp = findGDP(country)
+        d3.select("p#result").text(gdp)
+      }
+
+    </script>
+
+    <div id="header">
+      <h1> Country GDP vs Easy of business </h1>
+    </div>
+    <div id="search">
+      <form action="#">
+        Search: 
+        <input type="text" id="country">
+        <button type="submit" onclick="getCountry()"> GO </button> GDP: 
+      </form>
+      <p id="result">
+      </p>
+    </div>
+	</body>
+</html>
